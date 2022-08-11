@@ -74,7 +74,7 @@ productIds = recent_prod.productId.unique()
 total_ratings= len(recent_prod.index)
 ```
 
-- Tahap 3: Lakukan model training berdasarkan metriks yang sudah dituliskan pada code menjadi seperti ini :
+- Tahap 3: Lakukan model training berdasarkan metriks RMSE, Loss yang sudah dituliskan pada code menjadi seperti dibawah ini. Untuk penjelasan metriks akan ada di tahap evaluation
 
 ![image](https://user-images.githubusercontent.com/58683035/184107647-8f16d788-d685-4447-91bd-ae09bf885f5a.png)
 
@@ -83,9 +83,26 @@ total_ratings= len(recent_prod.index)
 
 ![image](https://user-images.githubusercontent.com/58683035/184107799-ae69b6b9-388d-441e-a025-5b5df95bcba5.png)
 
+Keterangan : untuk produk ID yang tampil 
+
+```
+B002FFG6JC
+B004ABO7QI
+B006YW3DI4
+B0012YJQWQ
+B006ZBWV0K
+```
+
+Diatas hanya berupa ID, seperti yang tercantum pada dataset awal. Berhubung tidak ada penjelasan barang apa yang tercantum pada product ID tersebut
+
 
 ## Evaluation
-Untuk meningkatkan dari code dalam jurnal [1] sistem rekomendasi penulis menggunakan metode CNN dengan bantuan tensorflow dan tensorflow_rankings. untuk pelatihan modelnya penulis menggunakan metriks Loss, RMSE, dan Regulation_Loss. Sehingga didapatkan hasil yang cukup memuaskan ( _tahap 4 Modeling_ ). Dengan begitu, goals diawal untuk membuat rekomendasi yang sebelumnya menggunakan clustering berhasil dibuat dengan performa yang baik. Sehingga, ketika diterapkan di model bisnis user tidak akan langsung meninggalkan platform _e-commerce_ dengan cepat. Melainkan, dapat melihat lihat rekomendasi dari produk yang bersangkutan dan ini dapat meningkatkam keramaian website.Uuntuk peningkatan performa kepedannya dapat mengubah arsitektur model pada bagian penambahan filtering dari CNN, dan mendapatkan hasil yang lebih efektif
+Untuk meningkatkan dari code dalam jurnal [1] sistem rekomendasi penulis menggunakan metode CNN dengan bantuan tensorflow dan tensorflow_rankings. untuk pelatihan modelnya penulis menggunakan metriks RMSE. RMSE merupakan _(Root Means Squared Error)_ [4]. 
+ 
+ ![image](https://user-images.githubusercontent.com/58683035/184137073-e56cc754-6793-4f55-8eb2-82bc87d5fd2f.png)
+
+
+Dalam penggunaan machine learning rekomendasi sistem ini RMSE berperan untuk mencari bobot besar berdasarkan loss yang besar. Penulis menggunakan RMSE karena tidak menginginkan _outlier_ pada model. Hasil yang didapat dari RMSE cukup memuaskan ( _tahap 4 Modeling_ ). Dengan begitu, goals diawal untuk membuat rekomendasi yang sebelumnya menggunakan clustering berhasil dibuat dengan performa yang baik. Sehingga, ketika diterapkan di dalam model bisnis _e-commerce_ user tidak akan langsung meninggalkan platform _e-commerce_ dengan cepat karena muncul item yang direkomendasikan pada layar. Tetapi, user dapat melihat lihat rekomendasi dari produk yang bersangkutan. hal itu, dapat meningkatkam tingkat keramaian website. Untuk peningkatan performa kepedannya dapat mengubah arsitektur model pada bagian penambahan filtering dari CNN, dan mendapatkan hasil yang lebih efektif
 
 ## Referensi
 [1] ALKHATIB, K., NAJADAT, H., HMEIDI, I. & SHATNAWI, M.K.A. 2013. Stock price prediction using k-nearest neighbor (kNN) algorithm. International Journal of Business, Humanities and Technology, 3(3), 32-44.
@@ -93,3 +110,5 @@ Untuk meningkatkan dari code dalam jurnal [1] sistem rekomendasi penulis menggun
 [2] VAINIONPÄÄ, I., & DAVIDSSON, S. 2014. Stock market prediction using the K Nearest Neighbours algorithm and a comparison with the moving average formula. 
 
 [3] Wan Song, Liu Sun, Wei Fan, Jun Sun 2017. An Automated CNN Recommendation System for Image Classification Tasks, Conference: International Conference on Multimedia and Expo 2017
+
+[4] T. Chai1,R. R. Draxler, 2014. Root mean square error (RMSE) or mean absolute error (MAE)? Arguments against avoiding RMSE in the literature. Copernicus Publications on behalf of the European Geosciences Union.
