@@ -92,3 +92,4 @@ Untuk meningkatkan dari code dalam jurnal [1] sistem rekomendasi penulis menggun
 
 [2] VAINIONPÄÄ, I., & DAVIDSSON, S. 2014. Stock market prediction using the K Nearest Neighbours algorithm and a comparison with the moving average formula. 
 
+[3] Wan Song, Liu Sun, Wei Fan, Jun Sun 2017. An Automated CNN Recommendation System for Image Classification Tasks, Conference: International Conference on Multimedia and Expo 2017
