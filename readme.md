@@ -93,7 +93,7 @@ B0012YJQWQ
 B006ZBWV0K
 ```
 
-Diatas hanya berupa ID, seperti yang tercantum pada dataset awal. Berhubung tidak ada penjelasan barang apa yang tercantum pada product ID tersebut
+Diatas hanya berupa ID, karena pada dataset awal tidak ada penjelasan dari setiap kode dari ID tersebut.
 
 
 ## Evaluation
