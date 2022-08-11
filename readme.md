@@ -85,7 +85,7 @@ total_ratings= len(recent_prod.index)
 
 
 ## Evaluation
-Untuk meningkatkan dari code dalam jurnal [1] sistem rekomendasi penulis menggunakan metode CNN dengan bantuan tensorflow dan tensorflow_rankings. untuk pelatihan modelnya penulis menggunakan metriks Loss, RMSE, dan Regulation_Loss. Sehingga didapatkan hasil yang cukup memuaskan ( _tahap 4 Modeling_ ). untuk peningkatan performa kepedannya dapat mengubah arsitektur model pada bagian penambahan filtering dari CNN.
+Untuk meningkatkan dari code dalam jurnal [1] sistem rekomendasi penulis menggunakan metode CNN dengan bantuan tensorflow dan tensorflow_rankings. untuk pelatihan modelnya penulis menggunakan metriks Loss, RMSE, dan Regulation_Loss. Sehingga didapatkan hasil yang cukup memuaskan ( _tahap 4 Modeling_ ). Dengan begitu, goals diawal untuk membuat rekomendasi yang sebelumnya menggunakan clustering berhasil dibuat dengan performa yang baik. Sehingga, ketika diterapkan di model bisnis user tidak akan langsung meninggalkan platform _e-commerce_ dengan cepat. Melainkan, dapat melihat lihat rekomendasi dari produk yang bersangkutan dan ini dapat meningkatkam keramaian website.Uuntuk peningkatan performa kepedannya dapat mengubah arsitektur model pada bagian penambahan filtering dari CNN, dan mendapatkan hasil yang lebih efektif
 
 ## Referensi
 [1] ALKHATIB, K., NAJADAT, H., HMEIDI, I. & SHATNAWI, M.K.A. 2013. Stock price prediction using k-nearest neighbor (kNN) algorithm. International Journal of Business, Humanities and Technology, 3(3), 32-44.
