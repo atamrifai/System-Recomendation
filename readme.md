@@ -97,7 +97,7 @@ Diatas hanya berupa ID, karena pada dataset awal tidak ada penjelasan dari setia
 
 
 ## Evaluation
-Untuk meningkatkan dari code dalam jurnal [1] sistem rekomendasi penulis menggunakan metode CNN dengan bantuan tensorflow dan tensorflow_rankings. untuk pelatihan modelnya penulis menggunakan metriks RMSE. RMSE merupakan _(Root Means Squared Error)_ [4]. 
+Untuk meningkatkan dari code dalam jurnal [1] sistem rekomendasi penulis menggunakan metode CNN dengan bantuan tensorflow dan tensorflow_rankings. Untuk pelatihan modelnya penulis menggunakan metriks RMSE. RMSE merupakan _(Root Means Squared Error)_ [4]. 
  
  ![image](https://user-images.githubusercontent.com/58683035/184137073-e56cc754-6793-4f55-8eb2-82bc87d5fd2f.png)
 
