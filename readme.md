@@ -38,27 +38,65 @@ Dalam mengelola data penulis melakukan beberapa pembersihan pada data, mengubah 
 
 - Tahap 1 : Data akan dijadikan object python terlebih dahulu dengan bantuan pandas 
 
+![image](https://user-images.githubusercontent.com/58683035/184065823-3f5eed4d-5ad0-4d36-8058-d192d67dd812.png)
+
+- Tahap 2 : Memahami persebaran isi data karena kebetulan object yang kita ingin analisis string, maka deskripsnua sebagai berikut
+
+![image](https://user-images.githubusercontent.com/58683035/184065986-60b076f3-896f-4eae-9af4-0c6e073fa0d5.png)
+
+- Tahap 3 : Melakukan pembersihan data, pada data-data yang null, sehingga tidak ada data null dengan code 
+
+```
+amazon_desc = product_descriptions.dropna()
+```
+
+- Tahap 4 : Melakukan sampeling data pada 2000 data, supaya tidak membenani kinerja mesin saat tokenizer nantinya dengan code
+
+```
+product_descriptions1 = product_descriptions.head(2000)
+```
+
+Pengeolahan data sampai di tahap ini, selanjutnya data yang sudah bersih ini akan diolah pada segment modelling
+
 
 ## Modeling
-Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
+Pada tahap modelling ini penulis menggunakan algoritma KNN dengan tambahan tokenizer untuk mengidentifikasi kata kata yang sekolompok. Tidak hanya itu untuk memerbaiki kinerja dari program, penulis menambahkan stop-word supaya kata kata yang diambil dalam bahasa inggris ini bukan kata kata penghubung dasar dan kata kerja dasar, melainkan benar benar objek. Beberapa tahapan saat modelling :
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
-- Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
+- Tahap 1: Melakukan tokenizer dan stop word supaya kata kata di saring untuk mendapatkan kata kata yang objek saja, dengan code :
+
+```
+vectorizer = TfidfVectorizer(stop_words='english')
+X1 = vectorizer.fit_transform(product_descriptions1["product_description"])
+X1
+```
+
+- Tahap 2: Menganalisa hasil persebaran kata kata ketika sudah dilakukan clustering. _Fitting_ dengan KNN sehingga hasilnya seperti berikut :
+
+![image](https://user-images.githubusercontent.com/58683035/184066553-ed90791d-50e0-4035-90bf-4351e076e3e3.png)
+
+- Tahap 3: Menampilkan hasil clustering dari deskripsi produk yang sejenis : 
+
+![image](https://user-images.githubusercontent.com/58683035/184066625-4cb966d9-41a0-42ce-ae61-2c26764b8cec.png)
+
+- Tahap 4: Membangun function untuk menampilkan prediksi rekomendasi dengan code :
+
+```
+def show_recommendations(product):
+    #print("Cluster ID:")
+    Y = vectorizer.transform([product])
+    prediction = model.predict(Y)
+    #print(prediction)
+    print_cluster(prediction[0])
+```
+
+
 
 ## Evaluation
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
-
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Ketika menjalankan sistem rekomendasi menggunakan metode clustering metrik dapat disususn dengan fungsi tokenizer, sehingga data yang tadinya perkalimat akan dipecah pecah menjadi perkata dan menghilangkan kata kata yang tidak mengandung unsur objek. Kemudian hasil dari tokenizer tadi dimasukkan kendalam KNN clustering untuk machinelearning membangun kesamaan antara kata kata teresbut. Sehingga klustering dapat berjalan dengan lancar dengan bantuan Tokenizer dan Stop-words
 
 **---Ini adalah bagian akhir laporan---**
 
 ## Referensi
 [1] ALKHATIB, K., NAJADAT, H., HMEIDI, I. & SHATNAWI, M.K.A. 2013. Stock price prediction using k-nearest neighbor (kNN) algorithm. International Journal of Business, Humanities and Technology, 3(3), 32-44.
 [2] VAINIONPÄÄ, I., & DAVIDSSON, S. 2014. Stock market prediction using the K Nearest Neighbours algorithm and a comparison with the moving average formula. 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+
