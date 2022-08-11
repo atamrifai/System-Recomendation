@@ -1,7 +1,7 @@
 # Laporan Proyek Machine Learning - Atam Rifa'i Sujiwanto
 
 ## Project Overview
-Konsep sistem rekomendasi telah digunakan oleh berbagai bisnis online seperti amazon.com dan ebay.com sebagai alat bisnis. Sistem rekomendasi dilaporkan telah meningkatkan penjualan produk dan membangun loyalitas pembeli [1]. Dengan begitu, ketika kita melakukan pencarian pada suatu website ini memberikan sistem rekomendasi yang tepat sasaran, seperti halnya pada penelitian sebelumnya [2]. Dengan menggunakan algoritma KNN _clustering_ penulis ingin menciptakan sistem rekomendasi yang dapat merekomendasikan kelompok-kelompok dari hasil pencarian tersebut
+Konsep sistem rekomendasi telah digunakan oleh berbagai bisnis online seperti amazon.com dan ebay.com sebagai alat bisnis. Sistem rekomendasi dilaporkan telah meningkatkan penjualan produk dan membangun loyalitas pembeli [1]. Dengan begitu, ketika kita melakukan pencarian pada suatu website ini memberikan sistem rekomendasi yang tepat sasaran, seperti halnya pada penelitian sebelumnya [2]. Namun, pada kali ini penulis menggunakan algoritma CNN dengan menggunakan tensorflow dengan evaluasi model _Loss_, _accuracy_ dan _MSE_
 
 
 ## Business Understanding
@@ -15,46 +15,48 @@ Bagian laporan ini mencakup:
 Menjelaskan pernyataan masalah:
 - Pelanggan yang meninggalkan website setelah barang yang diinginkan terpenuhi
 - Tingkat pengunjung yang rendah karena tidak adanya sistem rekomendasi
-- Kurang efektifnya tingkat rekomendasi secara manual
+- Kurang efektifnya tingkat rekomendasi secara Clustering
 
 ### Goals
 
 Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
 - Dapat merekomendasikan barang lain sehingga pelanggan tidak cepat cepat untuk pergi dari website kita
 - Meningkatkan tingkat pengunjung website dengan menampilkan rekomendasi sehingga pelanggan tetap betah di dalma website
-- Menanamkan algoritma _clustering_ pada sistem rekomendasi sehingga sistem jauh lebih efektif
+- Menanamkan algoritma CNN untuk mencoba mengevaluasi model dengan Metriks MSE dan LOSS sehingga lebih cepat
 
 ## Data Understanding
 Data yang didapatkan berasal dari deskripsi produk _amazon.com_ dalam kata kunci berbahasa inggris. yang terdiri dari 2 x 124427 data dengan masing memiliki deskripsi dari setiap produk yang ditautkan dengan ID produk. data dapat diunduh di [sini](https://sellercentral-europe.amazon.com/forums/t/csv-product-download/358218) beberapa variable dalam data yang saya gunakan :
 
 Variabel-variabel pada Deskripsi data dataset adalah sebagai berikut:
-- product_uid	= ID dari setiap produk deskripsi
-- product_description = deskripsi lengkap dari penjabaran id
-
-Menggunakan pemahaaman pada deskripsi pasti memiliki keterkaitan sehingga penulis menggunakan tokenizer nantinya yang akan di jelaskan pada data preparation.
+- userId    = ID user yang telah melakukan pembelian pada produk di website
+- productId = ID produk yang telah dibeli oleh user
+- rating    = Rating dari produk yang dinilai oleh user pada produk
+- timestamp = Tanggal terjadinya transaksi
 
 ## Data Preparation
 Dalam mengelola data penulis melakukan beberapa pembersihan pada data, mengubah string menjadi list hingga menyusun algoritma knn untuk clustering, detailnya :
 
-- Tahap 1 : Data akan dijadikan object python terlebih dahulu dengan bantuan pandas 
+- Tahap 1: Memasukkan data, sebelumnya tabel yang ada tidak ada nama kolomnya tampil seperti ini :
 
-![image](https://user-images.githubusercontent.com/58683035/184065823-3f5eed4d-5ad0-4d36-8058-d192d67dd812.png)
+![image](https://user-images.githubusercontent.com/58683035/184104837-76c81711-80d0-4766-af53-13199e9ea0bc.png)
 
-- Tahap 2 : Memahami persebaran isi data karena kebetulan object yang kita ingin analisis string, maka deskripsnua sebagai berikut
+- Tahap 2: Dengan melihat dokumentasi sumber data, penulis melakukan rename kolom sehingga tanpak seperti ini :
 
-![image](https://user-images.githubusercontent.com/58683035/184065986-60b076f3-896f-4eae-9af4-0c6e073fa0d5.png)
+![image](https://user-images.githubusercontent.com/58683035/184105009-dd72ae45-1dce-468a-bb3f-e0a2fb8d56b7.png)
 
-- Tahap 3 : Melakukan pembersihan data, pada data-data yang null, sehingga tidak ada data null dengan code 
+- Tahap 3: Seperti yang diajarkan dalam modul, pada tahap ini penulis berusaha untuk mempelajari distribusi data dan isinya dengan melakukan sintaks berikut ini:
 
-```
-amazon_desc = product_descriptions.dropna()
-```
+![image](https://user-images.githubusercontent.com/58683035/184105118-dc4c45d9-54f9-4944-a083-7188c722d677.png)
 
-- Tahap 4 : Melakukan sampeling data pada 2000 data, supaya tidak membenani kinerja mesin saat tokenizer nantinya dengan code
+- Tahap 4: Setelah data muncul, tahap selanjutnya adalah mengecek ketersediaan isi pada kolom, karena ketika ada missing kolom ini akan menyebabkan sistem rekomendasi kurang optimal
 
-```
-product_descriptions1 = product_descriptions.head(2000)
-```
+![image](https://user-images.githubusercontent.com/58683035/184105303-671c6624-1982-475f-8906-93652379c7f8.png)
+
+- Tahap 5: Mempelajari data dari parameter waktu dan rating, dengan begitu bisa dilihat bahwa untuk pemberian rating terbanyak itu pada tahun 2014  (gambar dibawah)
+
+![image](https://user-images.githubusercontent.com/58683035/184105720-d8a72c44-b7f5-4626-8253-588f36295d32.png)
+
+
 
 Pengeolahan data sampai di tahap ini, selanjutnya data yang sudah bersih ini akan diolah pada segment modelling
 
@@ -62,39 +64,28 @@ Pengeolahan data sampai di tahap ini, selanjutnya data yang sudah bersih ini aka
 ## Modeling
 Pada tahap modelling ini penulis menggunakan algoritma KNN dengan tambahan tokenizer untuk mengidentifikasi kata kata yang sekolompok. Tidak hanya itu untuk memerbaiki kinerja dari program, penulis menambahkan stop-word supaya kata kata yang diambil dalam bahasa inggris ini bukan kata kata penghubung dasar dan kata kerja dasar, melainkan benar benar objek. Beberapa tahapan saat modelling :
 
-- Tahap 1: Melakukan tokenizer dan stop word supaya kata kata di saring untuk mendapatkan kata kata yang objek saja, dengan code :
+- Tahap 1: Mendefinisikan ranking model merupakan library dari tensorflow untuk tiap tiap kolom Rating, UserID, dan ProdukID, dengan bantuan tensorflow
+
+- Tahap 2: Setting untuk setiap model yang dilatih, supaya saat model pelatihan tidak terdapat duplikat yang menyebabkan memori berlebih dengan code ini :
 
 ```
-vectorizer = TfidfVectorizer(stop_words='english')
-X1 = vectorizer.fit_transform(product_descriptions1["product_description"])
-X1
+userIds    = recent_prod.userId.unique()
+productIds = recent_prod.productId.unique()
+total_ratings= len(recent_prod.index)
 ```
 
-- Tahap 2: Menganalisa hasil persebaran kata kata ketika sudah dilakukan clustering. _Fitting_ dengan KNN sehingga hasilnya seperti berikut :
+- Tahap 3: Lakukan model training berdasarkan metriks yang sudah dituliskan pada code menjadi seperti ini :
 
-![image](https://user-images.githubusercontent.com/58683035/184066553-ed90791d-50e0-4035-90bf-4351e076e3e3.png)
+![image](https://user-images.githubusercontent.com/58683035/184107647-8f16d788-d685-4447-91bd-ae09bf885f5a.png)
 
-- Tahap 3: Menampilkan hasil clustering dari deskripsi produk yang sejenis : 
 
-![image](https://user-images.githubusercontent.com/58683035/184066625-4cb966d9-41a0-42ce-ae61-2c26764b8cec.png)
+- Tahap 4: Uji coba prediksi dengan memanggil function model dengan parameter user id, sehingga menjadi :
 
-- Tahap 4: Membangun function untuk menampilkan prediksi rekomendasi dengan code :
-
-```
-def show_recommendations(product):
-    #print("Cluster ID:")
-    Y = vectorizer.transform([product])
-    prediction = model.predict(Y)
-    #print(prediction)
-    print_cluster(prediction[0])
-```
-
+![image](https://user-images.githubusercontent.com/58683035/184107799-ae69b6b9-388d-441e-a025-5b5df95bcba5.png)
 
 
 ## Evaluation
-Ketika menjalankan sistem rekomendasi menggunakan metode clustering metrik dapat disususn dengan fungsi tokenizer, sehingga data yang tadinya perkalimat akan dipecah pecah menjadi perkata dan menghilangkan kata kata yang tidak mengandung unsur objek. Kemudian hasil dari tokenizer tadi dimasukkan kendalam KNN clustering untuk machinelearning membangun kesamaan antara kata kata teresbut. Sehingga klustering dapat berjalan dengan lancar dengan bantuan Tokenizer dan Stop-words
-
-**---Ini adalah bagian akhir laporan---**
+Untuk meningkatkan dari code dalam jurnal [1] sistem rekomendasi penulis menggunakan metode CNN dengan bantuan tensorflow dan tensorflow_rankings. untuk pelatihan modelnya penulis menggunakan metriks Loss, RMSE, dan Regulation_Loss. Sehingga didapatkan hasil yang cukup memuaskan ( _tahap 4 Modeling_ ). untuk peningkatan performa kepedannya dapat mengubah arsitektur model pada bagian penambahan filtering dari CNN.
 
 ## Referensi
 [1] ALKHATIB, K., NAJADAT, H., HMEIDI, I. & SHATNAWI, M.K.A. 2013. Stock price prediction using k-nearest neighbor (kNN) algorithm. International Journal of Business, Humanities and Technology, 3(3), 32-44.
