@@ -24,14 +24,7 @@ Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
 - Meningkatkan tingkat pengunjung website dengan menampilkan rekomendasi sehingga pelanggan tetap betah di dalma website
 - Menanamkan algoritma CNN untuk mencoba mengevaluasi model dengan Metriks MSE dan LOSS sehingga lebih cepat
 
-## Data Understanding
-Data yang didapatkan berasal dari deskripsi produk _amazon.com_ dalam kata kunci berbahasa inggris. yang terdiri dari 2 x 124427 data dengan masing memiliki deskripsi dari setiap produk yang ditautkan dengan ID produk. data dapat diunduh di [sini](https://sellercentral-europe.amazon.com/forums/t/csv-product-download/358218) beberapa variable dalam data yang saya gunakan :
 
-Variabel-variabel pada Deskripsi data dataset adalah sebagai berikut:
-- userId    = ID user yang telah melakukan pembelian pada produk di website
-- productId = ID produk yang telah dibeli oleh user
-- rating    = Rating dari produk yang dinilai oleh user pada produk
-- timestamp = Tanggal terjadinya transaksi
 
 ## Data Preparation
 Dalam mengelola data penulis melakukan beberapa pembersihan pada data, mengubah string menjadi list hingga menyusun algoritma knn untuk clustering, detailnya :
