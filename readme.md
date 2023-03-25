@@ -1,4 +1,7 @@
+# Laporan Proyek Machine Learning - Atam Rifa'i Sujiwanto
 
+## Project Overview
+Konsep sistem rekomendasi telah digunakan oleh berbagai bisnis online seperti amazon.com dan ebay.com sebagai alat bisnis. Sistem rekomendasi dilaporkan telah meningkatkan penjualan produk dan membangun loyalitas pembeli [1]. Dengan begitu, ketika kita melakukan pencarian pada suatu website ini memberikan sistem rekomendasi yang tepat sasaran, seperti halnya pada penelitian sebelumnya [2]. Namun, pada kali ini penulis menggunakan algoritma CNN dengan menggunakan tensorflow dengan evaluasi model _Loss_, _accuracy_ dan _MSE_
 
 
 ## Business Understanding
