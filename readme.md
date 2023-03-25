@@ -10,12 +10,7 @@ Pelanggan yang mengunjungi website tentu ingin pengalaman yang terbaik. Hal ters
 
 Bagian laporan ini mencakup:
 
-### Problem Statements
 
-Menjelaskan pernyataan masalah:
-- Pelanggan yang meninggalkan website setelah barang yang diinginkan terpenuhi
-- Tingkat pengunjung yang rendah karena tidak adanya sistem rekomendasi
-- Kurang efektifnya tingkat rekomendasi secara Clustering
 
 ### Goals
 
