@@ -8,7 +8,7 @@
 # In[1]:
 
 
-import numpy as np
+import numpy as np1
 import pandas as pd
 from datetime import datetime,timedelta
 
